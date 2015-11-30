@@ -504,10 +504,45 @@ public class Person {
 		return 0;
 	}
 	public static int s3(HttpServletRequest req, HttpServletResponse resp){
-		return 1;
+		//paymentMode, bankName, bankBranch, ddNo,
+		if(req.getParameterValues("dd") != null && req.getParameterValues("dd")[0].equals("true")){
+			Element pay = doc.createElement("pay");
+			pay.setTextContent("Card payment");
+			toadd.appendChild(pay);
+			return 0;
+		}
+		else{
+			bankName = req.getParameter("bankName");
+			bankBranch = req.getParameter("bankBranch");
+			ddNo = req.getParameter("ddNumber");
+			if(bankName.isEmpty()||bankBranch.isEmpty()|| ddNo.isEmpty())
+				return 1;
+			else{
+				Element pay = doc.createElement("pay");
+				pay.setTextContent("DD Details "+bankName+" "+bankBranch+" "+ddNo);
+				toadd.appendChild(pay);
+				toadd.setAttribute("payment", "1");
+				System.out.println("paid");
+				return 0;
+			}
+		}
 	}
 	public static int s4(HttpServletRequest req, HttpServletResponse resp){
-		return 1;
+		String feed1 = req.getParameter("feed1");
+		try{
+			Element hear = doc.createElement("hear");
+			hear.setTextContent(feed1);
+			toadd.appendChild(hear);
+		}catch(Exception e){return 1;}
+		Element interested = doc.createElement("interested");
+		toadd.appendChild(interested);
+		for(String s: req.getParameterValues("feed2")){
+			Element e = doc.createElement("in");
+			e.setTextContent(s);
+			interested.appendChild(e);
+		}
+		System.out.println("ok submitted");
+		return 0;
 	}
 	
 	public static void save1(HttpServletRequest req, HttpServletResponse resp){

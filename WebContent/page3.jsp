@@ -15,7 +15,7 @@
   </div>
   <form class="form-horizontal" role="form">
     <div class="checkbox">
-      <label><input type="checkbox" id="dd" name="dd">Will you be paying through Demand Draft</label>
+      <label><input type="checkbox" id="dd" name="dd" value="true">Will you be paying through Demand Draft</label>
     </div>
     <br>
     <div id="ddContent" style="display:none">
