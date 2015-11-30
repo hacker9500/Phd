@@ -136,6 +136,54 @@
         consol.log("sorry bro!!!");
       }
   }
+  function func()
+        {
+          var cse=["Artificial Intellgence and Robotics -CSE","Complilers-CSE","Computer Architecture and Systems Design-CSE","Computer Graphics-CSE"
+,"Computer Vision-CSE","Image Analysis and Biometrics-CSE","Information Mangement and Data Engineering-CSE","Machine Learning-CSE","Massively Parallel Systems-CSE","Mobile Computing and Networking Applications-CSE","Program Analysis-CSE","Security and Privacy-CSE","Signal and Image Processsing-CSE","Software Engineering -CSE","Theoretical Computer Science-CSE","Wireless Networks-CSE"];
+var ece=["Computer Architecture and Systems Design-ECE","Control and Robotics-ECE","Digital and Analog Systems VLSI Designs-ECE","ElectroMagnetics-ECE","Embedded and VLSI systems design-ECE","Embedded Systems-ECE","Fibre Wireless Architecture-ECE","Machine Learning-ECE","OFDM based Optical Access Networks-ECE","Optical Wireless Communicatioon System-ECE","RF and mixed signal electronics-ECE","Signal and Image processing-ECE","Wireless Communication-ECE","Wireless Networks-ECE"];
+      var cb=["Biophysics-CB","Structural Biology-CB","Systems Biology-CB"];
+      var pre=["phdpref1","phdpref2","phdpref3"];
+          var i;
+          var txt="<option>--------</option>";
+        if(document.getElementById("CSE").checked==true)
+          {
+                for(i=0;i<cse.length;i++)
+                {
+                  txt=txt+"<option"+">"+cse[i]+"</option>";
+                }
+                var j;
+                for(j=0;j<pre.length;j++)
+                {
+                  document.getElementById(pre[j]).innerHTML=txt;
+                }
+
+          }
+          else if(document.getElementById("ECE").checked==true)
+          {
+                for(i=0;i<ece.length;i++)
+                {
+                  txt=txt+"<option"+">"+ece[i]+"</option>";
+                }
+               var j;
+                for(j=0;j<pre.length;j++)
+                {
+                  document.getElementById(pre[j]).innerHTML=txt;
+                }
+          }
+           else if(document.getElementById("CB").checked==true)
+          {
+                for(i=0;i<cb.length;i++)
+                {
+                  txt=txt+"<option"+">"+cb[i]+"</option>";
+                }
+                var j;
+                for(j=0;j<pre.length;j++)
+                {
+                  document.getElementById(pre[j]).innerHTML=txt;
+                }
+          }
+
+        }
   var i=1;
   $(document).ready(function(){
     makeActive(1);
@@ -197,8 +245,9 @@
     $("#chk4").click(function(){
       $("#chkDiv4").toggle();
     });
-
-
+    $("#CSE").click(function(){ func() });
+    $("#ECE").click(function(){ func() });
+    $("#CB").click(function(){ func() });
   });
 </script>
 </html>

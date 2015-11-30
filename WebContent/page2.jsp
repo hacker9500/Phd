@@ -10,19 +10,19 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >Xth Board*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="xBoard">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Xth Marks(%)*</label>
     <div class="col-sm-4">
-      <input type="number" class="form-control" min="0.0" max="100.0">
+      <input type="number" class="form-control" min="0.0" max="100.0" name="xMarks">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Year of passing class Xth*</label>
     <div class="col-sm-4">
-      <select class="form-control">
+      <select class="form-control" name="xYear">
         <script>
           var i;
           for(i=2013;i>=1951;i--)
@@ -36,19 +36,19 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >XIIth Board*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="xiiBoard">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >XIIth Marks(%)*</label>
     <div class="col-sm-4">
-      <input type="number" class="form-control" min="0.0" max="100.0">
+      <input type="number" class="form-control" min="0.0" max="100.0" name="xiiMarks">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Year of passing class XIIth*</label>
     <div class="col-sm-4">
-      <select class="form-control">
+      <select class="form-control" name="xiiYear">
         <script>
           var i;
           for(i=2015;i>=1951;i--)
@@ -66,37 +66,37 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >Degree*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gradDegree">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Department/Discipline*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gradDepartment">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Name of College*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gCollege">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >Name of University*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gUniversity">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >City*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gCity">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" >State*</label>
     <div class="col-sm-4">
-      <select class="form-control">
+      <select class="form-control" name="gState">
         <script>
         var state=["Arunachal Pradesh","Assam","Bihar","J&K","Rajasthan","Uttar Pradesh","Punjab","Himachal Pradesh","Uttrakhand","Harayana","Madhya Pradesh","West Bengal","Chattisgarh","Tamil Nadu","Nagaland","Manipur","Mizoram","Tripura","Telangana","Kerala","Karantaka","Gujarat","Maharashtra","Delhi","Jharkhand","Anadaman & Nicobar Islands","Daman and Diu","Pondicherry","Sikkim","Orissa","Dadar and Nagar Haveli","Goa","Chandigarh","Meghalya","Other"];
         state.sort();
@@ -110,9 +110,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" >Year of Graduation*</label>
+    <label class="control-label col-sm-2">Year of Graduation*</label>
     <div class="col-sm-4">
-      <select class="form-control">
+      <select class="form-control" name="gYear">
         <script>
           var i;
           for(i=2015;i>=1951;i--)
@@ -127,11 +127,11 @@
     <label class="control-label col-sm-2" >CGPA or Marks*</label>
     <div class="col-sm-4">
      <div class="radio">
-        <label><input type="radio">CGPA</label><br>
+        <label><input type="radio" name="gCheck" value="CGPA">CGPA</label><br>
      </div>
       <input type="number" class="form-control">/<select class="form-control"><option>4</option><option>10</option></select><br>
       <div class="radio">
-        <label><input type="radio">Marks(%)</label><br>
+        <label><input type="radio" name="gCheck" value="Marks">Marks(%)</label><br>
         <input type="number" class="form-control" min="0.0" max="100.0">
       </div>
     </div>

@@ -10,7 +10,7 @@ public class tab3 extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		Person.save3(req, resp);
 	}
 
 }
