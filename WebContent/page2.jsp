@@ -329,14 +329,12 @@
        <label class="control-label col-sm-2" >Score</label>
         <div class="col-sm-4">
           <input type="number" class="form-control">
-          </select>
         </div>
     </div>
     <div class="form-group">
        <label class="control-label col-sm-2" >Rank</label>
         <div class="col-sm-4">
           <input type="number" class="form-control">
-          </select>
         </div>
     </div>
 </div>
@@ -404,7 +402,6 @@
       <label class="control-label col-sm-2" >Statement of Purpose*</label>
       <div class="col-sm-4">
         <button type="button">browse</button>
-      </select>
     </div>
 </div>
 <div class="form-group">
