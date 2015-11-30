@@ -129,17 +129,17 @@
      <div class="radio">
         <label><input type="radio" name="gCheck" value="CGPA">CGPA</label><br>
      </div>
-      <input type="number" class="form-control">/<select class="form-control"><option>4</option><option>10</option></select><br>
+      <input type="number" class="form-control" name="CGPA">/<select class="form-control" name="gFactor"><option>4</option><option>10</option></select><br>
       <div class="radio">
-        <label><input type="radio" name="gCheck" value="Marks">Marks(%)</label><br>
-        <input type="number" class="form-control" min="0.0" max="100.0">
+        <label><input type="radio" name="gCheck" value="MARKS">Marks(%)</label><br>
+        <input type="number" class="form-control" min="0.0" max="100.0" name="MARKS">
       </div>
     </div>
   </div>
 </div>
 <div class="form-group">
     <div class="checkbox col-sm-4">
-        <label><input type="checkbox" id="chk1">Are you applying for ECE PhD? </label>
+        <label><input type="checkbox" id="chk1" name="chk1" value="true">Are you applying for ECE PhD? </label>
     </div>
 </div>
 <div id="chkDiv1" style="display: none">
@@ -147,7 +147,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Preference 1* </label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="ecePref1" >
           <option>--------</option>
           <script>
             var opt=["Advanced Signal Processing","Statistical Signal Processing","Digital VLSI Design","Analaog CMOS Design","Digital Communications","Communication Networks","Linear Systems","Introduction to Robotics","RF Circuit Design","Antennas and Propagation","Embedded Systems"];
@@ -163,7 +163,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Preference 2* </label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="ecePref2">
           <option>--------</option>
           <script>
           var opt=["Advanced Signal Processing","Statistical Signal Processing","Digital VLSI Design","Analaog CMOS Design","Digital Communications","Communication Networks","Linear Systems","Introduction to Robotics","RF Circuit Design","Antennas and Propagation","Embedded Systems"];
@@ -179,7 +179,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Preference 3* </label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="ecePref3">
           <option>--------</option>
           <script>
             var opt=["Advanced Signal Processing","Statistical Signal Processing","Digital VLSI Design","Analaog CMOS Design","Digital Communications","Communication Networks","Linear Systems","Introduction to Robotics","RF Circuit Design","Antennas and Propagation","Embedded Systems"];
@@ -195,7 +195,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Preference 4 </label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="ecePref4">
           <option>--------</option>
           <script>
             var opt=["Advanced Signal Processing","Statistical Signal Processing","Digital VLSI Design","Analaog CMOS Design","Digital Communications","Communication Networks","Linear Systems","Introduction to Robotics","RF Circuit Design","Antennas and Propagation","Embedded Systems"];
@@ -211,28 +211,28 @@
 </div>
 <div class="form-group">
   <div class="checkbox col-sm-4">
-        <label><input type="checkbox" id="chk2">Have you completed your Post Graduation?  </label>
+        <label><input type="checkbox" id="chk2" name="chk2" value="true">Have you completed your Post Graduation?  </label>
   </div>
 </div>
 <div id="chkDiv2" style="display:none">
   <h3>Post Graduation Information</h3>
   <hr>
   <div class="form-group">
-      <label class="control-label col-sm-2" >Name of College</label>
+      <label class="control-label col-sm-2">Name of College</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="phdCollege">
       </div>
   </div>
   <div class="form-group">
-   <label class="control-label col-sm-2" >City</label>
+   <label class="control-label col-sm-2">City</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="phdCity">
     </div>
   </div>
   <div class="form-group">
   <label class="control-label col-sm-2" >State</label>
   <div class="col-sm-4">
-    <select class="form-control">
+    <select class="form-control" name="phdState">
       <script>
         var state=["Arunachal Pradesh","Assam","Bihar","J&K","Rajasthan","Uttar Pradesh","Punjab","Himachal Pradesh","Uttrakhand","Harayana","Madhya Pradesh","West Bengal","Chattisgarh","Tamil Nadu","Nagaland","Manipur","Mizoram","Tripura","Telangana","Kerala","Karantaka","Gujarat","Maharashtra","Delhi","Jharkhand","Anadaman & Nicobar Islands","Daman and Diu","Pondicherry","Sikkim","Orissa","Dadar and Nagar Haveli","Goa","Chandigarh","Meghalya","Other"];
         state.sort();
@@ -248,25 +248,25 @@
   <div class="form-group">
      <label class="control-label col-sm-2" >Department/Discipline</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="phdDepartment">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label col-sm-2" >Degree</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="phdDegree">
       </div>
   </div>
   <div class="form-group">
      <label class="control-label col-sm-2" >Thesis Title</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="phdTitle">
       </div>
   </div>
   <div class="form-group">
      <label class="control-label col-sm-2" >Year of Graduation*</label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="phdYear">
           <script>
             var i;
             for(i=2015;i>=1951;i--)
@@ -281,19 +281,19 @@
       <label class="control-label col-sm-2" >CGPA or Marks*</label>
       <div class="col-sm-4">
         <div class="radio">
-            <label><input type="radio">CGPA</label><br>
+            <label><input type="radio" name="phdRadio" value="CGPA">CGPA</label><br>
         </div>
-        <input type="number" class="form-control">/<select class="form-control"><option>4</option><option>10</option></select><br>
+        <input type="number" class="form-control" name="phdCGPA">/<select class="form-control" name="phdFactor"><option>4</option><option>10</option></select><br>
         <div class="radio">
-          <label><input type="radio">Marks(%)</label><br>
-          <input type="number" class="form-control" min="0.0" max="100.0">
+          <label><input type="radio" name="phdRadio" value="MARKS">Marks(%)</label><br>
+          <input type="number" class="form-control" min="0.0" max="100.0" name="phdMARKS">
         </div>
       </div>
   </div>
 </div>
 <div class="form-group">
     <div class="checkbox col-sm-4">
-          <label><input type="checkbox" id="chk3">Other Academic Degrees?  </label>
+          <label><input type="checkbox" id="chk3" name="chk3" value="true">Other Academic Degrees?  </label>
     </div>
 </div>
 <div id="chkDiv3" style="display:none">
@@ -302,19 +302,19 @@
     <div class="form-group">
       <label class="control-label col-sm-2" >Exam Name</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="examName">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" >Subject</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="examSubject">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" >Year*</label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="examYear">
           <script>
             var i;
             for(i=2015;i>=1951;i--)
@@ -328,19 +328,19 @@
     <div class="form-group">
        <label class="control-label col-sm-2" >Score</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control">
+          <input type="number" class="form-control" name="examScore">
         </div>
     </div>
     <div class="form-group">
        <label class="control-label col-sm-2" >Rank</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control">
+          <input type="number" class="form-control" name="examRank">
         </div>
     </div>
 </div>
 <div class="form-group">
   <div class="checkbox col-sm-4">
-      <label><input type="checkbox" id="chk4">Taken Gate Exam?  </label>
+      <label><input type="checkbox" id="chk4" name="chk4" value="true">Taken Gate Exam?  </label>
   </div>
 </div>
 <div  id="chkDiv4" style="display:none" class="form-group">
@@ -348,13 +348,13 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >Area*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="gateArea">
     </div>
   </div>
   <div class="form-group">
       <label class="control-label col-sm-2" >Year of Graduation*</label>
       <div class="col-sm-4">
-        <select class="form-control">
+        <select class="form-control" name="gateYear">
           <script>
             var i;
             for(i=2015;i>=1951;i--)
@@ -368,19 +368,19 @@
   <div class="form-group">
       <label class="control-label col-sm-2" >Marks</label>
       <div class="col-sm-4">
-        <input type="number" class="form-control" max="100" min="0">
+        <input type="number" class="form-control" name="gateMarks" max="100" min="0">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label col-sm-2" >Score</label>
       <div class="col-sm-4">
-        <input type="number" class="form-control" max="100" min="0">
+        <input type="number" class="form-control" max="100" min="0" name="gateScore">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label col-sm-2" >Rank</label>
       <div class="col-sm-4">
-        <input type="number" class="form-control" max="100" min="0">
+        <input type="number" class="form-control" max="100" min="0" name="gateRank">
       </div>
   </div>
 </div>
@@ -393,7 +393,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" >CV/Resume*</label>
+      <label class="control-label col-sm-2" >CV/Resume*</label>                      
       <div class="col-sm-4">
         <button type="button">browse</button>
       </div>
