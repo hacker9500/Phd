@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+
 <form class="form-horizontal" role="form">
 <div>
 <h3>Schooling Information</h3>
@@ -355,10 +357,10 @@
         <label><input type="checkbox" id="chk4">Taken Gate Exam?  </label>
   </div>
   </div>
-  <div  id="chkDiv4" style="display:none">
-  <div class="form-group">
+  <div  id="chkDiv4" style="display:none" class="form-group">
   <h3>Gate</h3>
   <hr>
+  <div class="form-group">
    <label class="control-label col-sm-2" >Area*</label>
     <div class="col-sm-4">
       <input type="text" class="form-control">
@@ -399,7 +401,6 @@
       <input type="number" class="form-control" max="100" min="0">
       </select>
     </div>
-</div>
 </div>
 </div>
 <div>
