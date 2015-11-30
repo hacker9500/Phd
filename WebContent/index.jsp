@@ -36,7 +36,7 @@
 
 <div class="col-lg-offset-1" id="t2" display="none">
 <%@ include file="/page2.jsp"%>
-</div>
+</div></div>
 
 <div class="col-lg-offset-1" id="t3" display="none">
 <%@ include file="/page3.jsp"%>
@@ -46,7 +46,7 @@
 <%@ include file="/page4.jsp"%>
 </div>
 
-<div class="col-lg-offset-1" id="t5" display="none">
+<div class="col-lg-offset-1" id="t5" display="block">
 <%@ include file="/page5.jsp"%>
 </div>
 
