@@ -248,6 +248,30 @@ var ece=["Computer Architecture and Systems Design-ECE","Control and Robotics-EC
     $("#CSE").click(function(){ func() });
     $("#ECE").click(function(){ func() });
     $("#CB").click(function(){ func() });
+    $("#payCard").prop({
+          'disabled': false
+        });
+    var payDis = 0;
+    $("#dd").click(function(){
+      $("#ddContent").slideToggle();
+      if(payDis == 0){
+        payDis = 1;
+        $("#payCard").prop({
+          'disabled': true
+        });
+      } else{
+        payDis = 0;
+        $("#payCard").prop({
+          'disabled': false
+        });
+      }
+    });
+    $("#payCard").click(function(){
+        $("#dd").prop({"disabled":true});
+        $("#payCard").prop({
+          'disabled': true
+        });
+    });
   });
 </script>
 </html>

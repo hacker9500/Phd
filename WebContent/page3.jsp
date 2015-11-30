@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
   <div class="well well-lg">You can pay the application fee of INR 350 online using Credit/Debit card or NetBanking.</div>
-  <button type="button" class="btn btn-success">Pay using Debit/Credit Card or Net Banking</button>
+  <button type="submit" class="btn btn-success" id="payCard">Pay using Debit/Credit Card or Net Banking</button>
   <br><br>
   <div class="well well-lg">
     <p>You can also make your payment using a Demand Draft of INR 350 in favour of "IIIT-Delhi Collections Account" payable at "Delhi" to the following address:<br>
@@ -15,45 +15,35 @@
   </div>
   <form class="form-horizontal" role="form">
     <div class="checkbox">
-      <label><input type="checkbox" onclick="func()">Will you be paying through Demand Draft</label>
+      <label><input type="checkbox" id="dd" name="dd">Will you be paying through Demand Draft</label>
     </div>
-    <script>
-      function func()
-      {
-        var ids=["bnkn","branch","dod"];
-        var i;
-        for(i=0;i<ids.length;i++)
-        {
-          document.getElementById(ids[i]).disabled=false;
-        }
-      }
-    </script>
     <br>
-    <div>
+    <div id="ddContent" style="display:none">
       <div class="form-group">
         <label class="control-label col-sm-2" >Bank Name*</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="bnkn" disabled>
+          <input type="text" class="form-control" id="bankName">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" >Branch*</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="branch" disabled>
+          <input type="text" class="form-control" id="bankBranch">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" >Demand Draft No.*</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="dod" disabled>
+          <input type="number" class="form-control" id="ddNumber">
         </div>
       </div>
-      <br>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
           <button type="submit" class="btn btn-default">Save</button>
         </div>
       </div>
+      <br>
     </div>
+
   </form>
 </div>
