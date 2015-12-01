@@ -369,7 +369,7 @@ public class filter extends HttpServlet{
 						int[] d2 = {Integer.parseInt(dt[2]), Integer.parseInt(dt[1]), Integer.parseInt(dt[0])};
 						//System.out.println(""+dtComp(dat,d2));
 						if(dobRadio.equals("before")){
-							if(dtComp(d2,dat) > 0)
+							if(dtComp(d2,dat) >= 0)
 							{
 								//System.out.println(e.dob);
 								rmList.add(e);
@@ -380,7 +380,7 @@ public class filter extends HttpServlet{
 								rmList.add(e);
 						}
 						else if(dobRadio.equals("after")){
-							if(dtComp(d2,dat) < 0)
+							if(dtComp(d2,dat) <= 0)
 								rmList.add(e);
 						}
 					}
