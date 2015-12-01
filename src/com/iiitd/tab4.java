@@ -11,6 +11,8 @@ public class tab4 extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Person.save4(req, resp);
+		req.getSession().setAttribute("feedback", "1");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 
 }

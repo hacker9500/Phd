@@ -1,7 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.iiitd.Person" %>
+<%@ page import="org.w3c.dom.Element" %>
 
-
+<%
+	try{
+		String email = (String)session.getAttribute("email");
+		if(email == null){
+			System.out.println("coming");
+			request.getRequestDispatcher("googleplus").forward(request,response);
+		}
+		Element e = Person.getElement(email);
+		session.setAttribute("save1", e.getAttribute("save1").toString());
+		session.setAttribute("save2", e.getAttribute("save2").toString());
+		session.setAttribute("payment", e.getAttribute("payment").toString());
+		session.setAttribute("feedback", e.getAttribute("feedback").toString());
+		session.setAttribute("submit", e.getAttribute("submit").toString());
+		session.setAttribute("enroll", e.getAttribute("enroll").toString());
+		if(e.getAttribute("submit").toString().equals("1")){
+			request.getRequestDispatcher("/thank.jsp").forward(request,response);
+		}
+		
+	}
+	catch(Exception ex){
+		System.out.println("coming");
+		request.getRequestDispatcher("googleplus").forward(request,response);
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>

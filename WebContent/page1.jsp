@@ -5,7 +5,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >Email*</label>
     <div class="col-sm-4">
-      <input type="email" class="form-control"  placeholder="Enter email" name="email">
+      <input type="email" class="form-control"  placeholder="Enter email" name="email" value=<%= (String)session.getAttribute("email") %> disabled>
     </div>
   </div>
   <div class="form-group">
@@ -17,7 +17,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2" >Enrollment Number*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" name="enroll">
+      <input type="text" class="form-control" name="enroll" value=<%= session.getAttribute("enroll").toString() %> disabled>
     </div>
   </div>
   <div class="form-group">
@@ -162,7 +162,11 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-4">
+    	<% if(session.getAttribute("save1").equals("1")) {%>
+      <button type="submit" class="btn btn-default" disabled>Save</button>
+      <%} else{ %>
       <button type="submit" class="btn btn-default">Save</button>
+      <%} %>
     </div>
   </div>
 </form>

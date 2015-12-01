@@ -12,6 +12,7 @@ public class tab3 extends HttpServlet{
 		// TODO Auto-generated method stub
 		System.out.println("coming payment");
 		Person.save3(req, resp);
+		req.getSession().setAttribute("payment", "1");
 	}
 
 }

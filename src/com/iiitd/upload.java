@@ -11,6 +11,7 @@ public class upload extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Person.upload(req, resp);
+		req.getSession().setAttribute("upload", "1");
 	}
 
 }

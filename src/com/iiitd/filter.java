@@ -2,6 +2,7 @@ package com.iiitd;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +15,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -43,11 +43,27 @@ public class filter extends HttpServlet{
 	
 	private int InitStructures(HttpServletRequest req){
 		try{
+			list = new ArrayList<>();
+			finalList = new ArrayList<>();
+			rmList = new ArrayList<>();
+			dates = new HashMap<String,Integer>();
+			dates.put("jan", 1);
+			dates.put("feb", 2);
+			dates.put("mar", 3);
+			dates.put("apr", 4);
+			dates.put("may", 5);
+			dates.put("jun", 6);
+			dates.put("jul", 7);
+			dates.put("aug", 8);
+			dates.put("sep", 9);
+			dates.put("oct", 10);
+			dates.put("nov", 11);
+			dates.put("dec", 12);
 			File fXmlFile;
 			DocumentBuilderFactory docFactory;
 			DocumentBuilder docBuilder;
 			Document doc;
-			fXmlFile = new File("./src/temp.xml");
+			fXmlFile = new File("/Users/ShubhamGoswami/Desktop/tmp/temp.xml");
 			docFactory = DocumentBuilderFactory.newInstance();
 			docBuilder = docFactory.newDocumentBuilder();
 			doc = docBuilder.parse(fXmlFile);
@@ -56,6 +72,7 @@ public class filter extends HttpServlet{
 			NodeList nl1 = doc.getElementsByTagName("entry");
 			int indx = 0;
 			for(indx = 0;indx<nl1.getLength();indx++){
+				//System.out.println("" + indx);
 				Element e1= (Element)nl1.item(indx);
 				if(e1.getAttribute("submit").equals("1"))
 				{
@@ -103,14 +120,14 @@ public class filter extends HttpServlet{
 			}
 				return 0;
 			}catch(Exception e){
-				System.out.println("oops");
+				System.out.println("oops "+e.toString());
 				return 1;
 			}
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//System.out.println("coming post");
+		System.out.println("coming post");
 		
 		//implement filtration here and serve table
 		if(InitStructures(req) == 1){
@@ -121,20 +138,24 @@ public class filter extends HttpServlet{
 			resp.setStatus(404);
 			return;
 		}
-		if(filterData() == 1){
+		if(filterData(req) == 1){
 			resp.setStatus(404);
 			return;
 		}
 		
 		//serving table
 		RequestDispatcher rd = req.getRequestDispatcher("table.jsp");
+		req.setAttribute("finalList", finalList);
+		rd.forward(req, resp);
 		
 	}
 	
 	public int dtComp(int[] d1,int[] d2){
 		//System.out.println(""+d1[0]+"-"+d1[1]+"-"+d1[2]+" "+d2[0]+"-"+d2[1]+"-"+d2[2]);
-		if(d1[0]>d2[0])
+		if(d1[0]>d2[0]){
+			//System.out.println(""+d1[0]+"-"+d2[0]);
 			return 1;
+		}
 		if(d1[0]<d2[0])
 			return -1;
 		if(d1[1]>d2[1])
@@ -274,8 +295,329 @@ public class filter extends HttpServlet{
 		return 0;
 	}
 	
-	private int filterData(){
-		return 1;
+	public  void filter1(){
+		for(Entry e : rmList)
+			finalList.remove(e);
+		rmList.clear();
 	}
-
+	
+	private int filterData(HttpServletRequest req){
+		//filtering
+				rmList.clear();
+				finalList.clear();
+				for(Entry e:list)
+					finalList.add(e);
+				System.out.println(""+finalList.size());
+				//filter name
+				if(!name.isEmpty())
+					for(Entry e:finalList)
+						if(!e.name.toLowerCase().equals(name.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter email
+				if(!email.isEmpty())
+					for(Entry e:finalList)
+						if(!e.email.toLowerCase().equals(email.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter enrollment no
+				if(!enrollmentNumber.isEmpty())
+					for(Entry e:finalList)
+						if(!e.enrollmentNumber.equals(enrollmentNumber))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size()+" "+category);
+				//filter category
+				if(category != null && !category.isEmpty())
+					for(Entry e:finalList)
+						if(!e.category.toLowerCase().equals(category.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gender
+				try{
+				System.out.println(gender);
+				if(gender!= null && !gender.isEmpty()){
+					for(Entry e:finalList){
+						if(!e.gender.toLowerCase().equals(gender.toLowerCase()))
+							rmList.add(e);
+					}
+					filter1();
+					System.out.println(""+finalList.size());
+				}
+				}catch(Exception e){System.out.println("gender error "+e.getMessage());}
+				try{
+					if(!disabled.isEmpty())
+						for(Entry e:finalList)
+							if(!e.disabled.toLowerCase().equals(disabled.toLowerCase()))
+								rmList.add(e);
+					filter1();
+					System.out.println(""+finalList.size());
+					}catch(Exception e){}
+				//filter dob
+				//SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+				try{
+					String[] temp = dob.split("-");
+				int[] dat = {Integer.parseInt(temp[0]),Integer.parseInt(temp[1]),Integer.parseInt(temp[2])};
+				System.out.println(dob.toString());
+				System.out.println(dobRadio);
+				if(!dob.isEmpty())
+					for(Entry e:finalList){
+						String[] dt = e.dob.split("-");
+						int[] d2 = {Integer.parseInt(dt[2]), Integer.parseInt(dt[1]), Integer.parseInt(dt[0])};
+						//System.out.println(""+dtComp(dat,d2));
+						if(dobRadio.equals("before")){
+							if(dtComp(d2,dat) > 0)
+							{
+								//System.out.println(e.dob);
+								rmList.add(e);
+							}
+						}
+						else if(dobRadio.equals("on")){
+							if(dtComp(d2,dat)!=0)
+								rmList.add(e);
+						}
+						else if(dobRadio.equals("after")){
+							if(dtComp(d2,dat) < 0)
+								rmList.add(e);
+						}
+					}
+				filter1();
+				System.out.println(""+finalList.size());
+				}catch(Exception e){System.out.println("error dob");}
+				//filter stream
+				if(!stream.isEmpty())
+					for(Entry e:finalList)
+						if(!e.stream.equals(stream))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gDegree
+				System.out.println(gDegree);
+				if(!gDegree.isEmpty())
+					for(Entry e:finalList)
+						if(!e.gDegree.toLowerCase().equals(gDegree.toLowerCase())){
+							System.out.println(e.gDegree);
+							rmList.add(e);
+						}
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter pgDegree
+				if(!pgDegree.isEmpty())
+					for(Entry e:finalList)
+						if(!e.pgDegree.toLowerCase().equals(pgDegree.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter xBoard
+				if(!xBoard.isEmpty())
+					for(Entry e:finalList)
+						if(!e.xBoard.toLowerCase().equals(xBoard.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter xiiBoard
+				if(!xiiBoard.isEmpty())
+					for(Entry e:finalList)
+						if(!e.xiiBoard.toLowerCase().equals(xiiBoard.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gDepartment
+				if(!gDepartment.isEmpty())
+					for(Entry e:finalList)
+						if(!e.gDepartment.toLowerCase().equals(gDepartment.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter pgDepartment
+				if(!pgDepartment.isEmpty())
+					for(Entry e:finalList)
+						if(!e.pgDepartment.toLowerCase().equals(pgDepartment.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gstate
+				if(!gState.isEmpty())
+					for(Entry e:finalList)
+						if(!e.gState.toLowerCase().equals(gState.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter pgState
+				if(!pgState.isEmpty())
+					for(Entry e:finalList)
+						if(!e.pgState.toLowerCase().equals(pgState.toLowerCase()))
+						{
+							rmList.add(e);
+						}
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gUniversity
+				if(!gUniversity.isEmpty())
+					for(Entry e:finalList)
+						if(!e.gUniversity.toLowerCase().equals(gUniversity.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter pg university
+				if(!pgUniversity.isEmpty())
+					for(Entry e:finalList)
+						if(!e.pgUniversity.toLowerCase().equals(pgUniversity.toLowerCase()))
+							rmList.add(e);
+				filter1();
+				System.out.println("x per "+finalList.size());
+				//filter xPercent
+				if(req.getParameterValues("xCheck")!=null && !xPercent.isEmpty())
+					for(Entry e:finalList)
+						for(String val: req.getParameterValues("xCheck"))
+							if(val.equals("gt")){
+								if(Double.parseDouble(e.xPercent)<=Double.parseDouble(xPercent))
+									rmList.add(e);
+							}
+							else if(val.equals("eq")){
+								if(Double.parseDouble(e.xPercent) != Double.parseDouble(xPercent))
+									rmList.add(e);
+							}
+							else if(val.equals("lt")){
+								if(Double.parseDouble(e.xPercent) >= Double.parseDouble(xPercent))
+									rmList.add(e);
+							}
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter xiiPercent
+				if(req.getParameterValues("xiiCheck")!=null && !xiiPercent.isEmpty())
+					for(Entry e:finalList)
+						for(String val: req.getParameterValues("xiiCheck"))
+							if(val.equals("gt")){
+								if(Double.parseDouble(e.xiiPercent)<=Double.parseDouble(xiiPercent))
+									rmList.add(e);
+							}
+							else if(val.equals("eq")){
+								if(Double.parseDouble(e.xiiPercent) != Double.parseDouble(xiiPercent))
+									rmList.add(e);
+							}
+							else if(val.equals("lt")){
+								if(Double.parseDouble(e.xiiPercent) >= Double.parseDouble(xiiPercent))
+									rmList.add(e);
+							}
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter gPercent
+				if(req.getParameterValues("gCheck")!=null && !gPercent.isEmpty())
+					for(Entry e:finalList)
+						for(String val: req.getParameterValues("gCheck"))
+						if(val.equals("gt")){
+							if(Double.parseDouble(e.gPercent)<=Double.parseDouble(gPercent))
+								rmList.add(e);
+						}
+						else if(val.equals("eq")){
+							if(Double.parseDouble(e.gPercent) != Double.parseDouble(gPercent))
+								rmList.add(e);
+						}
+						else if(val.equals("lt")){
+							if(Double.parseDouble(e.gPercent) >= Double.parseDouble(gPercent))
+								rmList.add(e);
+						}
+				filter1();
+				System.out.println("above pg"+finalList.size());
+				//filter pgPercent
+				System.out.println(req.getParameterValues("pgCheck") +" "+pgPercent);
+				if(req.getParameterValues("pgCheck")!=null && pgPercent != null && !pgPercent.isEmpty())
+					for(Entry e:finalList)
+						for(String val: req.getParameterValues("pgCheck"))
+							if(val.equals("gt")){
+								if(e.pgPercent == null || (e.pgPercent.isEmpty() || Double.parseDouble(e.pgPercent)<=Double.parseDouble(pgPercent))){
+									rmList.add(e);
+								}
+							}
+							else if(val.equals("eq")){
+								if(e.pgPercent == null || (e.pgPercent.isEmpty() || Double.parseDouble(e.pgPercent) != Double.parseDouble(pgPercent)))
+									rmList.add(e);
+							}
+							else if(val.equals("lt")){
+								if(e.pgPercent == null || (e.pgPercent.isEmpty() || Double.parseDouble(e.pgPercent) >= Double.parseDouble(pgPercent)))
+									rmList.add(e);
+							}
+				filter1();
+				System.out.println("pg "+finalList.size());
+				System.out.println(""+gateScore);
+				if(req.getParameterValues("gateCheck") !=null && gateScore!=null && !gateScore.isEmpty())
+					for(Entry e:finalList)
+						for(String val: req.getParameterValues("gateCheck"))
+							if(val.equals("gt")){
+								if(e.gateScore.isEmpty() || Double.parseDouble(e.gateScore)<=Double.parseDouble(gateScore)){
+									//System.out.println("gscore "+e.gateScore);
+									rmList.add(e);
+								}
+							}
+							else if(val.equals("eq")){
+								if(e.gateScore.isEmpty() || Double.parseDouble(e.gateScore) != Double.parseDouble(gateScore))
+									rmList.add(e);
+							}
+							else if(val.equals("lt")){
+								if(e.gateScore.isEmpty() || Double.parseDouble(e.gateScore) >= Double.parseDouble(gateScore)){
+									//System.out.println("gscore "+e.gateScore);
+									rmList.add(e);
+								}
+							}
+				filter1();
+				System.out.println(""+finalList.size());
+				//filter in dates
+				try{
+					int[] dat1;
+					dat1 = new int[3];
+					System.out.println(dateFrom);
+					String[] dt1 = dateFrom.split("-");
+					if(!dt1.toString().isEmpty()){
+						dat1[0] = Integer.parseInt(dt1[0]);
+						dat1[1] = Integer.parseInt(dt1[1]);
+						dat1[2] = Integer.parseInt(dt1[2]);
+					}
+					else{
+						dat1[0] = 0;
+						dat1[1] = 0;
+						dat1[2] = 0;
+					}
+					//System.out.println(dateFrom.toString());
+					if(!dt1.toString().isEmpty())
+						for(Entry e1:finalList){
+							String[] dt = e1.dated.split(" ")[0].split("-");
+							int[] dtf = {Integer.parseInt(dt[0]),dates.get(dt[1].toLowerCase()),Integer.parseInt(dt[2])};
+							if(dtComp(dat1,dtf)>0){
+								rmList.add(e1);
+							}
+						}
+					filter1();
+					
+					}catch(Exception ex){System.out.println(ex.toString());}
+				try{
+					int[] dat2;
+					dat2 = new int[3];
+					String[] dt2 = dateTo.split("-");
+					if(!dt2.toString().isEmpty()){
+						dat2[0] = Integer.parseInt(dt2[0]);
+						dat2[1] = Integer.parseInt(dt2[1]);
+						dat2[2] = Integer.parseInt(dt2[2]);
+					}
+					else{
+						dat2[0] = 0;
+						dat2[1] = 0;
+						dat2[2] = 0;
+					}
+					//System.out.println(dateFrom.toString());
+					if(!dt2.toString().isEmpty())
+						for(Entry e1:finalList){
+							String[] dt = e1.dated.split(" ")[0].split("-");
+							int[] dtf = {Integer.parseInt(dt[0]),dates.get(dt[1].toLowerCase()),Integer.parseInt(dt[2])};
+							if(dtComp(dat2,dtf)<0)
+								rmList.add(e1);
+						}
+					filter1();
+					System.out.println(""+finalList.size());
+					}catch(Exception ex){System.out.println("tab 3 error dt2");}
+				return 0;
+}
 }

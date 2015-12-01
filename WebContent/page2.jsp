@@ -395,27 +395,18 @@
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-4">
+    <% if(session.getAttribute("save2").equals("1")){ %>
+      <button type="submit" class="btn btn-default" disabled>Save</button>
+      <% } else { %>
       <button type="submit" class="btn btn-default">Save</button>
+      <%} %>
     </div>
 </div>
 </form>
 <hr>
 <form action="upload" method="post" enctype="multipart/form-data">
-  <div class="form-group">
-      <label class="control-label col-sm-2" >CV/Resume*</label>
-      <div class="col-sm-4">
-        <input type="file">browse</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" >Statement of Purpose*</label>
-      <div class="col-sm-4">
-        <input type="file">browse</button>
-    </div>
-</div>
-<div class="form-group">
-      <div class="col-sm-4">
-        <button type="submit">upload files!!</button>
-    </div>
-</div>
+  <input type="file" name="file1" size="500"><br>
+  <input type="file" name="file2" size="500"><br>
+  <button type="submit" disabled>upload!!!</button>
+  <button type="submit">upload!!!</button>
 </form>

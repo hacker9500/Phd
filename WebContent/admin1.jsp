@@ -25,7 +25,7 @@
                 <div class="col-sm-4">
                      <select class="form-control" name="category">
                         <script>
-                            var cate=["All","General","SC","ST","OBC"];
+                            var cate=["","General","SC","ST","OBC"];
                             var i;
                             for(i=0;i<cate.length;i++)
                             {
@@ -39,10 +39,10 @@
                 <label class="control-label col-sm-2">Gender</label>
                 <div class="col-sm-4">
                     <div class="radio" name="gender" value="MALE">
-                        <label><input type="radio">Male</label>
+                        <label><input type="radio" name="gender" value="MALE">Male</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="gender" value="FEMALE ">Female</label>
+                        <label><input type="radio" name="gender" value="FEMALE">Female</label>
                     </div>
                 </div>
             </div>

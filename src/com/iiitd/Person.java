@@ -97,7 +97,10 @@ public class Person {
 			e.setAttribute("payment", "0");
 			e.setAttribute("feedback", "0");
 			e.setAttribute("submit", "0");
-			e.setAttribute("enroll","0");
+			e.setAttribute("upload", "0");
+			String s = (String)doc.getElementsByTagName("current").item(0).getTextContent();
+			e.setAttribute("enroll",s);
+			doc.getElementsByTagName("current").item(0).setTextContent(String.valueOf(Integer.parseInt(s)+1));
 		}
 		
 		toadd = e;
@@ -151,7 +154,7 @@ public class Person {
 		// validating fields from backend
 		try{
 			email = "hello";
-			enroll = "1234";
+			enroll = toadd.getAttribute("enroll");
 		if(email.isEmpty() || name.isEmpty() || contact.isEmpty())
 			return 1;
 		else if(fatherName.isEmpty()||country.isEmpty()||pinCode.isEmpty()||areaCorrespondence.isEmpty()|| permanentAddress.isEmpty())
@@ -552,7 +555,7 @@ public class Person {
 	}
 	
 	public static void save1(HttpServletRequest req, HttpServletResponse resp){
-		Element e = getElement("hello");
+		Element e = getElement(req.getSession().getAttribute("email").toString());
 		if(toadd.getAttribute("save1").equals("1") || s1(req,resp) == 1){
 			resp.setStatus(405);
 			return;
@@ -561,7 +564,7 @@ public class Person {
 		saveData();
 	}
 	public static void save2(HttpServletRequest req, HttpServletResponse resp){
-		Element e = getElement("hello");
+		Element e = getElement(req.getSession().getAttribute("email").toString());
 		if(toadd.getAttribute("save2").equals("1") || s2(req,resp) == 1){
 			resp.setStatus(406);
 			return;
@@ -571,7 +574,7 @@ public class Person {
 	}
 	public static void save3(HttpServletRequest req, HttpServletResponse resp){
 		//Payment
-		Element e = getElement("hello");
+		Element e = getElement(req.getSession().getAttribute("email").toString());
 		if(toadd.getAttribute("payment").equals("1") || s3(req,resp) == 1){
 			resp.setStatus(407);
 			return;
@@ -580,7 +583,7 @@ public class Person {
 		saveData();
 	}
 	public  static void save4(HttpServletRequest req, HttpServletResponse resp){
-		Element e = getElement("hello");
+		Element e = getElement(req.getSession().getAttribute("email").toString());
 		if(toadd.getAttribute("feedback").equals("1") || s4(req,resp) == 1){
 			resp.setStatus(408);
 			return;
@@ -601,6 +604,10 @@ public class Person {
 		}
 		else if(s4(req,resp) == 1){
 			resp.setStatus(408);
+		}
+		upload(req,resp);
+		if(e.getAttribute("upload").equals("0")){
+			resp.setStatus(409);
 		}
 		else{
 			e.setAttribute("submit", "1");
@@ -644,12 +651,12 @@ public class Person {
 			}
 	}
     private static boolean isMultipart;
-    private static String filePath = "/Users/ShubhamGoswami/Desktop/CV/";
+    private static String filePath = "/Users/ShubhamGoswami/Desktop/PersonFiles/";
     private static int maxFileSize = 5000 * 1024;
     private static int maxMemSize = 400 * 1024;
     private static File file ;
 	public static void upload(HttpServletRequest req,HttpServletResponse resp){
-		Element e = getElement("hello");
+		Element e = getElement(req.getSession().getAttribute("email").toString());
 		isMultipart = ServletFileUpload.isMultipartContent(req);
 		System.out.println(isMultipart);
 	      if( !isMultipart ){
@@ -659,65 +666,59 @@ public class Person {
 	      // maximum size that will be stored in memory
 	      factory.setSizeThreshold(maxMemSize);
 	      // Location to save data that is larger than maxMemSize.
-	      factory.setRepository(new File("/Users/ShubhamGoswami/Desktop"));
+	      factory.setRepository(new File("/Users/ShubhamGoswami/Desktop/PersonFiles"));
 
 	      // Create a new file upload handler
 	      ServletFileUpload upload = new ServletFileUpload(factory);
 	      // maximum file size to be uploaded.
 	      upload.setSizeMax( maxFileSize );
-
 	      try{ 
-	      // Parse the request to get file items.
-	      List fileItems = upload.parseRequest(req);
-		
-	      // Process the uploaded file items
-	      Iterator i = fileItems.iterator();
-	      int j=0;
-	      while ( i.hasNext () ) 
-	      {
-	         FileItem fi = (FileItem)i.next();
-	         if ( !fi.isFormField () )	
-	         {
-	            // Get the uploaded file parameters
-	            String fieldName = fi.getFieldName();
-	            String fileName = fi.getName();
-	            String contentType = fi.getContentType();
-	            boolean isInMemory = fi.isInMemory();
-	            long sizeInBytes = fi.getSize();
-	            // Write the file
-	            System.out.println(fileName);
-	            if( fileName.lastIndexOf("\\") >= 0 ){
-	               file = new File( filePath + 
-	               fileName.substring( fileName.lastIndexOf("\\"))) ;
-	               if(j==0)
-	            	   cvPath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
-	               else
-	            	   purposePath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
-	            }else{
-	               file = new File( filePath + 
-	               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-	               if(j==0)
-	            	   cvPath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
-	               else
-	            	   purposePath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
-	            }
-	            fi.write( file ) ;
-	            
-	         }
-	         j++;
-	      }
-	      if(j<2) resp.setStatus(404);
-	      Element cv,purpose;
-	      cv = doc.createElement("cvPath");
-	      purpose = doc.createElement("purposePath");
-	      cv.setTextContent(cvPath);
-	      purpose.setTextContent(purposePath);
-	      toadd.appendChild(cv);
-	      toadd.appendChild(purpose);
-	      saveData();
-	   }catch(Exception ex) {
-	       System.out.println(ex);
-	       resp.setStatus(404);
-	   }
+		      // Parse the request to get file items.
+		      List fileItems = upload.parseRequest(req);
+			
+		      // Process the uploaded file items
+		      Iterator i = fileItems.iterator();
+		      int j=0;
+		      while ( i.hasNext () ) 
+		      {
+		         FileItem fi = (FileItem)i.next();
+		         if ( !fi.isFormField () )	
+		         {
+		            // Get the uploaded file parameters
+		            String fieldName = fi.getFieldName();
+		            String fileName = fi.getName();
+		            String contentType = fi.getContentType();
+		            boolean isInMemory = fi.isInMemory();
+		            long sizeInBytes = fi.getSize();
+		            // Write the file
+		            if(j==0)
+		            	cvPath = filePath+fileName;
+		            else
+		            	purposePath = filePath+fileName;
+		            System.out.println(fileName);
+		            if( fileName.lastIndexOf("\\") >= 0 ){
+		               file = new File( filePath + 
+		               fileName.substring( fileName.lastIndexOf("\\"))) ;
+		            }else{
+		               file = new File( filePath + 
+		               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+		            }
+		            fi.write( file ) ;
+		            resp.getWriter().println("Uploaded Filename: " + fileName + "<br>");
+		         }
+		         j++;
+		      }
+		      Element cv = doc.createElement("cvPath");
+		      Element pur = doc.createElement("purposePath");
+		      cv.setTextContent(cvPath);
+		      pur.setTextContent(purposePath);
+		      toadd.appendChild(cv);
+		      toadd.appendChild(pur);
+		      saveData();
+		      toadd.setAttribute("upload", "1");
+		   }catch(Exception ex) {
+			   resp.setStatus(404);
+		       System.out.println(ex);
+		   }
 	}
 }

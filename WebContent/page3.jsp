@@ -39,7 +39,11 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
+        <% if(session.getAttribute("payment").equals("1")) { %>
+          <button type="submit" class="btn btn-default" disabled>Save</button>
+          <% } else { %>
           <button type="submit" class="btn btn-default">Save</button>
+          <% } %>
         </div>
       </div>
       <br>

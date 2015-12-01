@@ -5,19 +5,32 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" >PhD Stream</label>
                 <div class="col-sm-4">
-                     <input type="text" name="stream">
+                     <select type="text" name="stream">
+                     <option></option>
+                     <option>Computer Science</option>
+                     <option>Electronics and Communication</option>
+                     <option>Computational Biology</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" >Graduation Degree</label>
                 <div class="col-sm-4">
-                     <input type="text" name="gradDegree">
+                     <select type="text" name="gradDegree">
+                     <option></option>
+                     <option>B.Tech</option>
+                     <option>B.E</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" >Post Graduation Degree</label>
                 <div class="col-sm-4">
-                     <input type="text" name="pgDegree">
+                     <select type="text" name="pgDegree">
+                     <option></option>
+                     <option>M.Tech</option>
+                     <option>M.S</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
@@ -35,13 +48,25 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" >Department(Graduation)</label>
                 <div class="col-sm-4">
-                     <input type="text" name="gradDepartment">
+                     <select type="text" name="gradDepartment">
+                     <option></option>
+                     <option>Computer Science</option>
+                     <option>Electronics and Communication</option>
+                     <option>Computational Biology</option>
+                     <option>Information Technology</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" >Department(Post Graduation)</label>
                 <div class="col-sm-4">
-                     <input type="text" name="pgDepartment">
+                     <select type="text" name="pgDepartment">
+                     <option></option>
+                     <option>Computer Science</option>
+                     <option>Electronics and Communication</option>
+                     <option>Computational Biology</option>
+                     <option>Information Technology</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
@@ -59,13 +84,35 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" >State(Graduation from)</label>
                 <div class="col-sm-4">
-                     <input type="text" name="gState">
+                     <select type="text" name="gState">
+                     <option></option>
+                     <script>
+        var state=["Arunachal Pradesh","Assam","Bihar","J&K","Rajasthan","Uttar Pradesh","Punjab","Himachal Pradesh","Uttrakhand","Harayana","Madhya Pradesh","West Bengal","Chattisgarh","Tamil Nadu","Nagaland","Manipur","Mizoram","Tripura","Telangana","Kerala","Karantaka","Gujarat","Maharashtra","Delhi","Jharkhand","Anadaman & Nicobar Islands","Daman and Diu","Pondicherry","Sikkim","Orissa","Dadar and Nagar Haveli","Goa","Chandigarh","Meghalya","Other"];
+        state.sort();
+        var i;
+        for(i=0;i<state.length;i++)
+        {
+            document.write("<option>"+state[i]+"</option>");
+        }
+        </script>
+                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" >State(Post Graduation from)</label>
                 <div class="col-sm-4">
-                     <input type="text" name="pgState">
+                     <select type="text" name="pgState">
+                     <option></option>
+                     <script>
+        var state=["Arunachal Pradesh","Assam","Bihar","J&K","Rajasthan","Uttar Pradesh","Punjab","Himachal Pradesh","Uttrakhand","Harayana","Madhya Pradesh","West Bengal","Chattisgarh","Tamil Nadu","Nagaland","Manipur","Mizoram","Tripura","Telangana","Kerala","Karantaka","Gujarat","Maharashtra","Delhi","Jharkhand","Anadaman & Nicobar Islands","Daman and Diu","Pondicherry","Sikkim","Orissa","Dadar and Nagar Haveli","Goa","Chandigarh","Meghalya","Other"];
+        state.sort();
+        var i;
+        for(i=0;i<state.length;i++)
+        {
+            document.write("<option>"+state[i]+"</option>");
+        }
+        </script>
+                     </select>
                 </div>
             </div>
             <div class="form-group">

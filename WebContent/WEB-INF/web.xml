@@ -33,6 +33,10 @@
   	<servlet-class>com.iiitd.filter</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>show</servlet-name>
+  	<servlet-class>com.iiitd.show</servlet-class>
+  </servlet>
+  <servlet>
   	<servlet-name>admin</servlet-name>
   	<jsp-file>/admin.jsp</jsp-file>
   </servlet>
@@ -67,5 +71,9 @@
   <servlet-mapping>
   	<servlet-name>filter</servlet-name>
   	<url-pattern>/filter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>show</servlet-name>
+  	<url-pattern>/show</url-pattern>
   </servlet-mapping>
 </web-app>

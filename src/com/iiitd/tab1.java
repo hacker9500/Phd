@@ -12,6 +12,8 @@ public class tab1 extends HttpServlet{
 		// TODO Auto-generated method stub
 		//System.out.println("coming post");
 		Person.save1(req, resp);
+		req.getSession().setAttribute("save1", "1");
+		req.getRequestDispatcher("./index.jsp").forward(req, resp);
 	}
 
 }
