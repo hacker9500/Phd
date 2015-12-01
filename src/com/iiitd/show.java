@@ -64,7 +64,7 @@ public class show extends HttpServlet{
 			NodeList nl1 = (NodeList)fnd.getChildNodes();
 			for(int j=0;j<nl1.getLength();j++){
 				Element tt = (Element)nl1.item(j);
-				st += (tt.getTagName()+" "+tt.getTextContent()+"\n");
+				st += (tt.getTagName()+" "+tt.getTextContent()+"<br>");
 			}
 			req.setAttribute("str", st);
 			req.getRequestDispatcher("/data.jsp").forward(req, resp);

@@ -42,6 +42,10 @@ ArrayList<Entry> finalList = (ArrayList<Entry>)request.getAttribute("finalList")
                 </tbody>
                 <% } %>
             </table>
+            <br>
+            <hr>
+            <br>
+            <div id="content"></div>
     </div>
 </body>
 <script>
@@ -49,7 +53,7 @@ ArrayList<Entry> finalList = (ArrayList<Entry>)request.getAttribute("finalList")
         $(".show").click(function(){
             var a = $(this).attr("value");
             console.log("coming click "+a);
-             $.post("show",{email:a},function(data,status){alert(data);});
+             $.post("show",{email:a},function(data,status){$("#content").html(data)});
         });
     });
 </script>
