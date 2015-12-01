@@ -1,5 +1,5 @@
 package com.iiitd;
-
+/* @author Parikshit_Diwan_2014074 @author Shubham_Goswami_2014100*/
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -13,6 +13,7 @@ public class tab3 extends HttpServlet{
 		System.out.println("coming payment");
 		Person.save3(req, resp);
 		req.getSession().setAttribute("payment", "1");
+		req.getRequestDispatcher("/index.js").forward(req, resp);
 	}
 
 }

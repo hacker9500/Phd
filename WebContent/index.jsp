@@ -23,7 +23,7 @@
 		
 	}
 	catch(Exception ex){
-		System.out.println("coming");
+		System.out.println("comingErr");
 		request.getRequestDispatcher("googleplus").forward(request,response);
 	}
 %>

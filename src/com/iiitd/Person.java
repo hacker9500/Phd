@@ -1,5 +1,5 @@
 package com.iiitd;
-
+/* @author Parikshit_Diwan_2014074 @author Shubham_Goswami_2014100*/
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -68,7 +68,7 @@ public class Person {
 	public static Element getElement(String email){
 		
 		try{
-			fXmlFile = new File("/Users/ShubhamGoswami/Desktop/temp.xml");
+			fXmlFile = new File("/Users/ShubhamGoswami/Desktop/tmp/temp.xml");
 			docFactory = DocumentBuilderFactory.newInstance();
 			docBuilder = docFactory.newDocumentBuilder();
 			doc = docBuilder.parse(fXmlFile);
@@ -643,7 +643,7 @@ public class Person {
 			data.appendChild(toadd);
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("/Users/ShubhamGoswami/Desktop/temp.xml"));
+			StreamResult result = new StreamResult(new File("/Users/ShubhamGoswami/Desktop/tmp/temp.xml"));
 			transformer.transform(source, result);
 			System.out.println("File saved!");
 			}catch(Exception e){
