@@ -38,7 +38,11 @@
   </servlet>
   <servlet>
   	<servlet-name>admin</servlet-name>
-  	<jsp-file>/admin.jsp</jsp-file>
+  	<jsp-file>/login.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<servlet-name>cred</servlet-name>
+  	<servlet-class>com.iiitd.cred</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>tab1</servlet-name>
@@ -75,5 +79,9 @@
   <servlet-mapping>
   	<servlet-name>show</servlet-name>
   	<url-pattern>/show</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>cred</servlet-name>
+  	<url-pattern>/cred</url-pattern>
   </servlet-mapping>
 </web-app>
