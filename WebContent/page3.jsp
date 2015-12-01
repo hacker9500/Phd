@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="container-fluid">
+  <form class="form-horizontal" role="form" action="tab3" method="post">
   <div class="well well-lg">You can pay the application fee of INR 350 online using Credit/Debit card or NetBanking.</div>
   <button type="submit" class="btn btn-success" id="payCard">Pay using Debit/Credit Card or Net Banking</button>
   <br><br>
@@ -13,7 +14,6 @@
     New Delhi - 110020<br>
     Please fill in the details of your demand draft in the following form.</p>
   </div>
-  <form class="form-horizontal" role="form">
     <div class="checkbox">
       <label><input type="checkbox" id="dd" name="dd" value="true">Will you be paying through Demand Draft</label>
     </div>
@@ -22,19 +22,19 @@
       <div class="form-group">
         <label class="control-label col-sm-2" >Bank Name*</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="bankName">
+          <input type="text" class="form-control" id="bankName" name="bankName">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" >Branch*</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="bankBranch">
+          <input type="text" class="form-control" id="bankBranch" name="bankBranch">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" >Demand Draft No.*</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="ddNumber">
+          <input type="number" class="form-control" id="ddNumber" name="ddNumber">
         </div>
       </div>
       <div class="form-group">

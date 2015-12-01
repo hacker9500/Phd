@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-  <form class="form-class" role="form">
+  <form class="form-class" role="form" action="tab4" method="post">
    <div class="form-group">
       <label class="control-label col-sm-2" >How did you first hear about the IIIT-Delhi PhD program?*</label>
       <div class="col-sm-4">

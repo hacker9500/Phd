@@ -266,12 +266,12 @@ var ece=["Computer Architecture and Systems Design-ECE","Control and Robotics-EC
         });
       }
     });
-    $("#payCard").click(function(){
-        $("#dd").prop({"disabled":true});
-        $("#payCard").prop({
-          'disabled': true
-        });
-    });
+    // $("#payCard").click(function(){
+    //     $("#dd").prop({"disabled":true});
+    //     $("#payCard").prop({
+    //       'disabled': true
+    //     });
+    // });
   });
 </script>
 </html>

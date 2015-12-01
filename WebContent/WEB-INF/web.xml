@@ -24,6 +24,18 @@
   	<servlet-name>tab5</servlet-name>
   	<servlet-class>com.iiitd.tab5</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>upload</servlet-name>
+  	<servlet-class>com.iiitd.upload</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>filter</servlet-name>
+  	<servlet-class>com.iiitd.filter</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>admin</servlet-name>
+  	<jsp-file>/admin.jsp</jsp-file>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>tab1</servlet-name>
   	<url-pattern>/tab1</url-pattern>
@@ -43,5 +55,17 @@
   <servlet-mapping>
   	<servlet-name>tab5</servlet-name>
   	<url-pattern>/tab5</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>upload</servlet-name>
+  	<url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>admin</servlet-name>
+  	<url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>filter</servlet-name>
+  	<url-pattern>/filter</url-pattern>
   </servlet-mapping>
 </web-app>

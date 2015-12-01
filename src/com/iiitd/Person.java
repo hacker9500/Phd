@@ -1,9 +1,19 @@
 package com.iiitd;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.output.*;
 
 import javax.servlet.http.*;
 
@@ -13,6 +23,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.ws.Response;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -252,14 +263,14 @@ public class Person {
 			marksField = req.getParameter("Marks");
 			cgpaField = req.getParameter("CGPA");
 			// Applying for ECE
-			if(req.getParameterValues("chk1") == null){
+			if(req.getParameterValues("chk1") != null){
 				chk1 = req.getParameterValues("chk1")[0];
 				ecePref1 = req.getParameter("ecePref1");
 				ecePref2 = req.getParameter("ecePref2");
 				ecePref3 = req.getParameter("ecePref3");
 				ecePref4 = req.getParameter("ecePref4");
 			}
-			if(req.getParameterValues("chk2") == null){
+			if(req.getParameterValues("chk2") != null){
 				chk2 = req.getParameterValues("chk2")[0];
 				phdCollege  = req.getParameter("phdCollege");
 				phdCity = req.getParameter("phdCity");
@@ -271,7 +282,7 @@ public class Person {
 				phdMarks = req.getParameter("phdMarks");
 				
 			}
-			if(req.getParameterValues("chk3") == null){
+			if(req.getParameterValues("chk3") != null){
 				chk3 = req.getParameterValues("chk3")[0];
 				examName = req.getParameter("examName");
 				examSubject = req.getParameter("examSubject");
@@ -279,7 +290,7 @@ public class Person {
 				examScore = req.getParameter("examScore");
 				examRank = req.getParameter("examRank");
 			}
-			if(req.getParameterValues("chk4") == null){
+			if(req.getParameterValues("chk4") != null){
 				chk4 = req.getParameterValues("chk4")[0];
 				gateArea = req.getParameter("gateArea");
 				gateYear = req.getParameter("gateYear");
@@ -287,8 +298,8 @@ public class Person {
 				gateScore = req.getParameter("gateScore");
 				gateRank = req.getParameter("gateRank");
 			}
-		}catch(Exception ex){return 1;}
-		
+		}catch(Exception ex){System.out.println("init Error");return 1;}
+		System.out.println("no init error");
 		try{
 		if(xBoard.isEmpty()||xMarks.isEmpty()||xiiBoard.isEmpty()||xiiMarks.isEmpty()||gradDegree.isEmpty()||gradDepartment.isEmpty()||gCollege.isEmpty()|| gUniversity.isEmpty()|| gCity.isEmpty())
 			return 1;
@@ -297,8 +308,7 @@ public class Person {
 //		else if(cvText1.equals("No File chosen") || statePurposeTxt1.equals("No File chosen"))
 //			return 1;
 		else{
-			try{
-				try{
+					try{
 					if(Double.parseDouble(xMarks) > 100 || Double.parseDouble(xMarks) < 0 || Double.parseDouble(xiiMarks)>100 || Double.parseDouble(xiiMarks)<0){
 						return 1;
 					}
@@ -306,6 +316,7 @@ public class Person {
 						return 1;
 					}
 				if(chk1 != null && !chk1.isEmpty()){
+					System.out.println("coming in");
 					if(ecePref1.isEmpty()|| ecePref2.isEmpty()||ecePref3.isEmpty()||ecePref4.isEmpty())
 						return 1;
 					else if(ecePref1.equals(ecePref2)||ecePref1.equals(ecePref3)||ecePref1.equals(ecePref4)||ecePref2.equals(ecePref3)||ecePref2.equals(ecePref4)||ecePref3.equals(ecePref4))
@@ -396,7 +407,7 @@ public class Person {
 						toadd.appendChild(oyear);
 					}
 				}
-				if(chk1 != null && !chk1.isEmpty()){
+				if(chk4 != null && !chk4.isEmpty()){
 					if(gateYear.isEmpty()||gateArea.isEmpty()||gateMarks.isEmpty()||gateScore.isEmpty()||gateRank.isEmpty())
 						return 1;
 					else{
@@ -426,8 +437,7 @@ public class Person {
 						toadd.appendChild(gyear);
 						
 					}
-				}
-//				
+				}	
 				
 				Element xbr,xpr,xiibr,xiipr,deg,dep,cljname,uniname,coljcity,mrks,coljstate,grayear,markdiv,xpass,xiipass,cv,purpose;
 				xbr = doc.createElement("xBoard");
@@ -445,8 +455,6 @@ public class Person {
 				markdiv = doc.createElement("markDiv");
 				xpass = doc.createElement("xPassingYear");
 				xiipass = doc.createElement("xiiPassingYear");
-				cv = doc.createElement("cvPath");
-				purpose = doc.createElement("purposePath");
 				
 				xbr.setTextContent(xBoard);
 				xpr.setTextContent(xMarks);
@@ -472,8 +480,6 @@ public class Person {
 				cvPath = "hello";
 				purposePath = "hello";
 				
-				cv.setTextContent(cvPath);
-				purpose.setTextContent(purposePath);
 				
 				toadd.appendChild(xbr);
 				toadd.appendChild(xpr);
@@ -490,31 +496,25 @@ public class Person {
 				toadd.appendChild(markdiv);
 				toadd.appendChild(xpass);
 				toadd.appendChild(xiipass);
-				toadd.appendChild(cv);
-				toadd.appendChild(purpose);
 				
 				toadd.setAttribute("save2", "1");
 				System.out.println("saved 2");
 				//uploadFiles();
-			}catch(Exception e){
-				return 1;
 			}
+		}catch(Exception e){
+			System.out.println("not init error1");
+			return 1;
 		}
-		}catch(Exception ex1){ return 1;}
 		return 0;
 	}
 	public static int s3(HttpServletRequest req, HttpServletResponse resp){
 		//paymentMode, bankName, bankBranch, ddNo,
 		if(req.getParameterValues("dd") != null && req.getParameterValues("dd")[0].equals("true")){
-			Element pay = doc.createElement("pay");
-			pay.setTextContent("Card payment");
-			toadd.appendChild(pay);
-			return 0;
-		}
-		else{
-			bankName = req.getParameter("bankName");
+			System.out.println("coming if");
+			try{bankName = req.getParameter("bankName");
 			bankBranch = req.getParameter("bankBranch");
 			ddNo = req.getParameter("ddNumber");
+			System.out.println(bankName+" "+bankBranch+" "+ddNo);
 			if(bankName.isEmpty()||bankBranch.isEmpty()|| ddNo.isEmpty())
 				return 1;
 			else{
@@ -524,7 +524,13 @@ public class Person {
 				toadd.setAttribute("payment", "1");
 				System.out.println("paid");
 				return 0;
-			}
+			}}catch(Exception ex1){System.out.println("error is here");return 1;}
+		}
+		else{
+			Element pay = doc.createElement("pay");
+			pay.setTextContent("Card payment");
+			toadd.appendChild(pay);
+			return 0;
 		}
 	}
 	public static int s4(HttpServletRequest req, HttpServletResponse resp){
@@ -555,7 +561,7 @@ public class Person {
 		saveData();
 	}
 	public static void save2(HttpServletRequest req, HttpServletResponse resp){
-		Element e = getElement(req.getSession().getAttribute("email").toString());
+		Element e = getElement("hello");
 		if(toadd.getAttribute("save2").equals("1") || s2(req,resp) == 1){
 			resp.setStatus(406);
 			return;
@@ -565,7 +571,7 @@ public class Person {
 	}
 	public static void save3(HttpServletRequest req, HttpServletResponse resp){
 		//Payment
-		Element e = getElement(req.getSession().getAttribute("email").toString());
+		Element e = getElement("hello");
 		if(toadd.getAttribute("payment").equals("1") || s3(req,resp) == 1){
 			resp.setStatus(407);
 			return;
@@ -574,7 +580,7 @@ public class Person {
 		saveData();
 	}
 	public  static void save4(HttpServletRequest req, HttpServletResponse resp){
-		Element e = getElement(req.getSession().getAttribute("email").toString());
+		Element e = getElement("hello");
 		if(toadd.getAttribute("feedback").equals("1") || s4(req,resp) == 1){
 			resp.setStatus(408);
 			return;
@@ -598,6 +604,29 @@ public class Person {
 		}
 		else{
 			e.setAttribute("submit", "1");
+			
+			//save the person file
+			if(toadd.getAttribute("save1").equals("1")&&toadd.getAttribute("save2").equals("1")&&toadd.getAttribute("payment").equals("1"))
+			{
+				toadd.setAttribute("submit", "1");
+				try{
+					Element fileT = doc.createElement("fileT");
+					String path = "/Users/ShubhamGoswami/Desktop/PersonFiles/"+toadd.getElementsByTagName("eno").item(0).getTextContent()+".txt";
+					fileT.setTextContent(path);
+					toadd.appendChild(fileT);
+					PrintWriter pw = new PrintWriter(new FileWriter(path));
+					NodeList nl = toadd.getChildNodes();
+					for(int i=0;i<nl.getLength();i++){
+						Element em = (Element)nl.item(i);
+						pw.println(em.getTagName()+" " +em.getTextContent());
+					}
+					pw.close();
+				}catch(Exception ex){
+					resp.setStatus(404);
+					return;
+				}
+			}
+			
 			saveData();
 		}
 	}
@@ -613,5 +642,82 @@ public class Person {
 			}catch(Exception e){
 				System.out.println("omg!!!");
 			}
+	}
+    private static boolean isMultipart;
+    private static String filePath = "/Users/ShubhamGoswami/Desktop/CV/";
+    private static int maxFileSize = 5000 * 1024;
+    private static int maxMemSize = 400 * 1024;
+    private static File file ;
+	public static void upload(HttpServletRequest req,HttpServletResponse resp){
+		Element e = getElement("hello");
+		isMultipart = ServletFileUpload.isMultipartContent(req);
+		System.out.println(isMultipart);
+	      if( !isMultipart ){
+	         return;
+	      }
+	      DiskFileItemFactory factory = new DiskFileItemFactory();
+	      // maximum size that will be stored in memory
+	      factory.setSizeThreshold(maxMemSize);
+	      // Location to save data that is larger than maxMemSize.
+	      factory.setRepository(new File("/Users/ShubhamGoswami/Desktop"));
+
+	      // Create a new file upload handler
+	      ServletFileUpload upload = new ServletFileUpload(factory);
+	      // maximum file size to be uploaded.
+	      upload.setSizeMax( maxFileSize );
+
+	      try{ 
+	      // Parse the request to get file items.
+	      List fileItems = upload.parseRequest(req);
+		
+	      // Process the uploaded file items
+	      Iterator i = fileItems.iterator();
+	      int j=0;
+	      while ( i.hasNext () ) 
+	      {
+	         FileItem fi = (FileItem)i.next();
+	         if ( !fi.isFormField () )	
+	         {
+	            // Get the uploaded file parameters
+	            String fieldName = fi.getFieldName();
+	            String fileName = fi.getName();
+	            String contentType = fi.getContentType();
+	            boolean isInMemory = fi.isInMemory();
+	            long sizeInBytes = fi.getSize();
+	            // Write the file
+	            System.out.println(fileName);
+	            if( fileName.lastIndexOf("\\") >= 0 ){
+	               file = new File( filePath + 
+	               fileName.substring( fileName.lastIndexOf("\\"))) ;
+	               if(j==0)
+	            	   cvPath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
+	               else
+	            	   purposePath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
+	            }else{
+	               file = new File( filePath + 
+	               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+	               if(j==0)
+	            	   cvPath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
+	               else
+	            	   purposePath = filePath + fileName.substring( fileName.lastIndexOf("\\"));
+	            }
+	            fi.write( file ) ;
+	            
+	         }
+	         j++;
+	      }
+	      if(j<2) resp.setStatus(404);
+	      Element cv,purpose;
+	      cv = doc.createElement("cvPath");
+	      purpose = doc.createElement("purposePath");
+	      cv.setTextContent(cvPath);
+	      purpose.setTextContent(purposePath);
+	      toadd.appendChild(cv);
+	      toadd.appendChild(purpose);
+	      saveData();
+	   }catch(Exception ex) {
+	       System.out.println(ex);
+	       resp.setStatus(404);
+	   }
 	}
 }

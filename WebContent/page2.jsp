@@ -3,7 +3,7 @@
 
 
 
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" action="tab2" method="post">
 <div>
   <h3>Schooling Information</h3>
   <hr>
@@ -392,21 +392,30 @@
         <input type="text" class="form-control">
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" >CV/Resume*</label>                      
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+</div>
+</form>
+<hr>
+<form action="upload" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+      <label class="control-label col-sm-2" >CV/Resume*</label>
       <div class="col-sm-4">
-        <button type="button">browse</button>
+        <input type="file">browse</button>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" >Statement of Purpose*</label>
       <div class="col-sm-4">
-        <button type="button">browse</button>
+        <input type="file">browse</button>
     </div>
 </div>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-4">
-      <button type="submit" class="btn btn-default">Save</button>
+      <div class="col-sm-4">
+        <button type="submit">upload files!!</button>
     </div>
 </div>
 </form>
