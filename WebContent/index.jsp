@@ -17,10 +17,11 @@
 		session.setAttribute("feedback", e.getAttribute("feedback").toString());
 		session.setAttribute("submit", e.getAttribute("submit").toString());
 		session.setAttribute("enroll", e.getAttribute("enroll").toString());
+		session.setAttribute("upload", e.getAttribute("upload").toString());
 		if(e.getAttribute("submit").toString().equals("1")){
 			request.getRequestDispatcher("/thank.jsp").forward(request,response);
 		}
-		
+
 	}
 	catch(Exception ex){
 		System.out.println("comingErr");
@@ -55,23 +56,23 @@
 </div>
 <br>
 
-<div class="col-lg-offset-1" id="t1" display="none">
+<div class="col-lg-offset-1 col-lg-10" id="t1" display="none">
   <%@ include file="/page1.jsp"%>
 </div>
 
-<div class="col-lg-offset-1" id="t2" display="none">
+<div class="col-lg-offset-1 col-lg-10" id="t2" display="none">
 <%@ include file="/page2.jsp"%>
 </div></div>
 
-<div class="col-lg-offset-1" id="t3" display="none">
+<div class="col-lg-offset-1 col-lg-10" id="t3" display="none">
 <%@ include file="/page3.jsp"%>
 </div>
 
-<div class="col-lg-offset-1" id="t4" display="none">
+<div class="col-lg-offset-1 col-lg-10" id="t4" display="none">
 <%@ include file="/page4.jsp"%>
 </div>
 
-<div class="col-lg-offset-1" id="t5" display="block">
+<div class="col-lg-offset-1 col-lg-10" id="t5" display="block">
 <%@ include file="/page5.jsp"%>
 </div>
 

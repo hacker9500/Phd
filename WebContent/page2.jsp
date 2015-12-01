@@ -374,13 +374,13 @@
   <div class="form-group">
       <label class="control-label col-sm-2" >Score</label>
       <div class="col-sm-4">
-        <input type="number" class="form-control" max="100" min="0" name="gateScore">
+        <input type="number" class="form-control" max="1000" min="0" name="gateScore">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label col-sm-2" >Rank</label>
       <div class="col-sm-4">
-        <input type="number" class="form-control" max="100" min="0" name="gateRank">
+        <input type="number" class="form-control" max="100000" min="0" name="gateRank">
       </div>
   </div>
 </div>
@@ -407,6 +407,9 @@
 <form action="upload" method="post" enctype="multipart/form-data">
   <input type="file" name="file1" size="500"><br>
   <input type="file" name="file2" size="500"><br>
+  <% if(session.getAttribute("upload").equals("1")){ %>
   <button type="submit" disabled>upload!!!</button>
+  <% } else { %>
   <button type="submit">upload!!!</button>
+  <% } %>
 </form>

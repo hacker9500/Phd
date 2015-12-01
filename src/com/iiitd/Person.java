@@ -207,7 +207,8 @@ public class Person {
 					 strm.setTextContent(stream);
 					 dis.setTextContent(disabled);
 					 mob.setTextContent(contact);
-					 db.setTextContent(dob);
+					 String[] st = dob.split("-");
+					 db.setTextContent(st[2]+"-"+st[1]+"-"+st[0]);
 					 
 					 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 						Calendar cal = Calendar.getInstance();
@@ -310,6 +311,8 @@ public class Person {
 			return 1;
 //		else if(cvText1.equals("No File chosen") || statePurposeTxt1.equals("No File chosen"))
 //			return 1;
+		else if(!(Integer.parseInt(xYear)+1 < Integer.parseInt(xiiYear)))
+				return 1;
 		else{
 					try{
 					if(Double.parseDouble(xMarks) > 100 || Double.parseDouble(xMarks) < 0 || Double.parseDouble(xiiMarks)>100 || Double.parseDouble(xiiMarks)<0){
@@ -714,8 +717,8 @@ public class Person {
 		      pur.setTextContent(purposePath);
 		      toadd.appendChild(cv);
 		      toadd.appendChild(pur);
+		      toadd.setAttribute("upload","1");
 		      saveData();
-		      toadd.setAttribute("upload", "1");
 		   }catch(Exception ex) {
 			   resp.setStatus(404);
 		       System.out.println(ex);

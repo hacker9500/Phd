@@ -12,6 +12,7 @@ public class upload extends HttpServlet{
 		// TODO Auto-generated method stub
 		Person.upload(req, resp);
 		req.getSession().setAttribute("upload", "1");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 
 }

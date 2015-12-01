@@ -12,7 +12,7 @@ public class cred extends HttpServlet{
 		// TODO Auto-generated method stub
 		if(req.getParameter("user").equals("shubham") && req.getParameter("password").equals("1234")){
 			System.out.println("comig match");
-			req.setAttribute("admin", "1");
+			req.getSession().setAttribute("admin", "1");
 			req.getRequestDispatcher("/admin.jsp").forward(req, resp);
 		}
 		else

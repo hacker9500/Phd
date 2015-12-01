@@ -138,7 +138,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" >Graduation Marks Percentage</label>
+                <label class="control-label col-sm-2" >Graduation CGPA</label>
                 <div class="col-sm-4">
                      <div class="checkbox">
                         <label><input type="checkbox"  name="gCheck" value="gt">Greater than</label>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" >Post Graduation Marks Percentage</label>
+                <label class="control-label col-sm-2" >Post Graduation CGPA</label>
                 <div class="col-sm-4">
                      <div class="checkbox">
                         <label><input type="checkbox" name="pgCheck" value="gt">Greater than</label>
